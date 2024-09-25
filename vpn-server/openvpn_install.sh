@@ -76,6 +76,8 @@ fi
 
 new_client () {
 	# Generates the custom client.ovpn
+	client="$1"
+	
 	{
 	cat /etc/openvpn/server/client-common.txt
 	echo "<ca>"
