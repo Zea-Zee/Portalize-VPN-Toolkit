@@ -1,17 +1,15 @@
 import os
 import datetime
 import subprocess
-import json
+import socket
 
 
 name = input("Name: ")
-enddate = "noenddate"#input("End date: YYYY-MM-DD): ")
+enddate = "2099-12-28"#input("End date: YYYY-MM-DD): ")
 
 
 def create_configs(name: str, enddate: str):
-    with open('config.json', 'r') as file:
-        data = json.load(file)
-        host = data.get('hostname')
+    host = socket.gethostname()    
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
 
     client_name_1 = f"{host}_{name}_1_{current_date}_{enddate}"
@@ -22,7 +20,6 @@ def create_configs(name: str, enddate: str):
     print(client_name_2)
 
     subprocess.run(['sudo', 'chmod', '+x', 'openvpn_install.sh'])
-
 
     os.environ['NEW_OPENVPN_CLIENT'] = client_name_1
     subprocess.run(['sudo', 'openvpn_install.sh'])
