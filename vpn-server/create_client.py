@@ -4,12 +4,7 @@ import subprocess
 import socket
 
 
-name = input("Name: ")
-id = 1
-enddate = "2099-12-28"#input("End date: YYYY-MM-DD): ")
-
-
-def new_client(name, id):
+def new_client(name='DEFAULT', id=1, enddate='2099-12-28'):
     host = socket.gethostname()
     current_date = datetime.datetime.now().strftime("%Y-%m-%d")
 
@@ -20,10 +15,9 @@ def new_client(name, id):
     file.write(client_name + '\n')
 
     subprocess.run(['sudo', 'chmod', '+x', './openvpn_install.sh'])
-
     subprocess.run(['sudo', './openvpn_install.sh'])
 
 
-new_client(name, id)
+new_client()
 
 print(f"Successfully created configs")
