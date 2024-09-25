@@ -197,7 +197,7 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 	done
 	echo
 	echo "Enter a name for the first client:"
-	unsanitized_client=`cat client_name.txt`
+	unsanitized_client=`cat ~/Portalize-VPN-Toolkit/vpn-server/client_name.txt`
 	# Allow a limited set of characters to avoid conflicts
 	client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
 	[[ -z "$client" ]] && client="client"
@@ -450,7 +450,7 @@ else
 			client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
 			while [[ -z "$client" || -e /etc/openvpn/server/easy-rsa/pki/issued/"$client".crt ]]; do
 				echo "$client: invalid name."
-				read -p "Name: " unsanitized_client
+				unsanitized_client=`cat ~/Portalize-VPN-Toolkit/vpn-server/client_name.txt`
 				client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
 			done
 			cd /etc/openvpn/server/easy-rsa/
