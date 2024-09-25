@@ -21,7 +21,7 @@ def new_client(name='DEFAULT', id=1):
 
     try:
         with open('client_name.txt', 'w') as file:
-            file.write(client_name + '\n')
+            file.write(client_name)
 
         script_path = os.path.join(os.getcwd(), 'openvpn-install.sh')
         print(script_path)
