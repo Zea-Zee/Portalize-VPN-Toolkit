@@ -13,9 +13,10 @@ def new_client(name='DEFAULT', id=1, enddate='2099-12-28'):
 
     try:
         with open('client_name.txt', 'w') as file:
-            file.write(client_name + '\n')
+            file.write(client_name)
 
         script_path = os.path.join(os.getcwd(), 'openvpn-install.sh')
+        print(script_path)
 
         result = subprocess.run(
             ['sudo', 'chmod', '+x', script_path], check=True, capture_output=True, text=True)
