@@ -4,8 +4,8 @@ import subprocess
 import json
 
 
-name = "test"#input("Name: ")
-enddate = "2024_10_23"#input("End date: YYYY-MM-DD): ")
+name = #input("Name: ")
+enddate = "noenddate"#input("End date: YYYY-MM-DD): ")
 
 
 def create_configs(name: str, enddate: str):
