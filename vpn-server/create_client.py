@@ -17,7 +17,6 @@ def new_client(name='DEFAULT', id=1):
     host = socket.gethostname()
     client_name = f"{name}_{host}_{id}"
     print(f"Creating config {client_name}")
-    exit()
 
     try:
         with open('client_name.txt', 'w') as file:
