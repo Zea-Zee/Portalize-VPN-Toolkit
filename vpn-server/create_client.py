@@ -4,7 +4,7 @@ import subprocess
 import socket
 
 
-def new_client(name='DEFAULT', id=1):
+def new_client(name='DEFAULT', tgid=1, confid=1):
     clients_dir = '/root/clients'
 
     # Проверка существования папки clients и создание, если ее нет
@@ -15,7 +15,7 @@ def new_client(name='DEFAULT', id=1):
         print(f"Directory '{clients_dir}' already exists.")
 
     host = socket.gethostname()
-    client_name = f"{name}_{host}_{id}"
+    client_name = f"{name}_{host}_{tgid}_{confid}"
     print(f"Creating config {client_name}")
 
     try:
