@@ -30,7 +30,7 @@ def new_client(name='DEFAULT', id=1):
 
 if __name__ == "__main__":
     try:
-        name = input()
+        name = input("Enter name of key: ")
         new_client(name)
         print("Successfully created configs")
     except Exception as e:
