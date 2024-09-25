@@ -18,16 +18,12 @@ def new_client(name='DEFAULT', id=1, enddate='2099-12-28'):
         script_path = os.path.join(os.getcwd(), 'openvpn-install.sh')
         print(script_path)
 
-        result = subprocess.run(
-            ['sudo', 'chmod', '+x', script_path], check=True, capture_output=True, text=True)
-        if result.returncode != 0:
-            raise Exception("Failed to change permissions for the script.")
-
         result = subprocess.run(['bash', script_path],
                                 check=True, capture_output=True, text=True)
         if result.returncode != 0:
-            raise Exception(f"Failed to execute the script. Error: {
-                            result.stderr.strip()}")
+            raise Exception(f"New client error {result.stderr.strip()}")
+
+        print(result)
 
     except Exception as e:
         raise Exception(f"An error occurred: {e}")
@@ -35,7 +31,8 @@ def new_client(name='DEFAULT', id=1, enddate='2099-12-28'):
 
 if __name__ == "__main__":
     try:
-        new_client()
+        name = input
+        new_client(name)
         print("Successfully created configs")
     except Exception as e:
         print(f"Error: {e}")
