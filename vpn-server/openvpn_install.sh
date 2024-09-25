@@ -75,6 +75,9 @@ TUN needs to be enabled before running this installer."
 fi
 
 new_client () {
+    # Принимаем имя клиента как аргумент функции
+	client=`cat client_name.txt`
+	rm cat client_name.txt
 
     # Генерируем кастомный файл client.ovpn
     {
