@@ -21,11 +21,14 @@ def create_configs(name: str, enddate: str):
     print(client_name_1)
     print(client_name_2)
 
+    subprocess.run(['sudo', 'chmod', '+x', 'openvpn_install.sh'])
+
+
     os.environ['NEW_OPENVPN_CLIENT'] = client_name_1
-    subprocess.run(['./install.sh'])
+    subprocess.run(['sudo', 'openvpn_install.sh'])
 
     os.environ['NEW_OPENVPN_CLIENT'] = client_name_2
-    subprocess.run(['./install.sh'])
+    subprocess.run(['sudo', 'openvpn_install.sh'])
 
 
 create_configs(name, enddate)
