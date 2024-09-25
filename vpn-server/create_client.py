@@ -5,8 +5,16 @@ import socket
 
 
 def new_client(name='DEFAULT', id=1):
-    host = socket.gethostname()
+    clients_dir = '/root/clients'
 
+    # Проверка существования папки clients и создание, если ее нет
+    if not os.path.exists(clients_dir):
+        os.makedirs(clients_dir)
+        print(f"Directory '{clients_dir}' created.")
+    else:
+        print(f"Directory '{clients_dir}' already exists.")
+
+    host = socket.gethostname()
     client_name = f"{name}_{host}_{id}"
     print(f"Creating config {client_name}")
 
