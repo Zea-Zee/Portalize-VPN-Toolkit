@@ -4,7 +4,7 @@ import subprocess
 import json
 
 
-name = #input("Name: ")
+name = input("Name: ")
 enddate = "noenddate"#input("End date: YYYY-MM-DD): ")
 
 
