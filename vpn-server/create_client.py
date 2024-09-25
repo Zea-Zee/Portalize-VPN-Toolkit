@@ -4,11 +4,10 @@ import subprocess
 import socket
 
 
-def new_client(name='DEFAULT', id=1, enddate='2099-12-28'):
+def new_client(name='DEFAULT', id=1):
     host = socket.gethostname()
-    current_date = datetime.datetime.now().strftime("%Y-%m-%d")
 
-    client_name = f"{name}_{host}_{current_date}_{enddate}_{id}"
+    client_name = f"{name}_{host}_{id}"
     print(f"Creating config {client_name}")
 
     try:
