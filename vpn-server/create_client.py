@@ -17,7 +17,6 @@ def new_client(name='DEFAULT', id=1, enddate='2099-12-28'):
 
         script_path = os.path.join(os.getcwd(), 'openvpn-install.sh')
 
-        # Установите права на выполнение
         result = subprocess.run(
             ['sudo', 'chmod', '+x', script_path], check=True, capture_output=True, text=True)
         if result.returncode != 0:
