@@ -39,3 +39,13 @@ gift_plans = InlineKeyboardMarkup(inline_keyboard=[
     ],
     resize_keyboard=True
 )
+
+platform_options = InlineKeyboardMarkup(inline_keyboard=[
+    [InlineKeyboardButton(text='Android 🤖', callback_data='choose_tunnel,android')],
+    [InlineKeyboardButton(text='iOS 🍏', callback_data='choose_tunnel,android')],
+    [InlineKeyboardButton(text='Windows ', callback_data='choose_tunnel,android')],
+    [InlineKeyboardButton(text='Android 🤖', callback_data='choose_tunnel,android')],
+    [InlineKeyboardButton(text='Назад 🔙', callback_data='back_button')]
+    ],
+    resize_keyboard=True
+)

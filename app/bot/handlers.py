@@ -7,7 +7,7 @@ from aiogram.filters import CommandStart, Command
 
 
 from config import GROUP_ID
-import keyboards as kb
+import bot.keyboards as kb
 
 
 router = Router()
@@ -74,24 +74,16 @@ async def make_payment(callback: CallbackQuery):
 @router.callback_query(F.data == 'check_subscription')
 async def check_subscription(callback: CallbackQuery):
     user_id = callback.from_user.id
-    channel_id = GROUP_ID
-
     print(GROUP_ID)
 
     try:
-        member = await callback.bot.get_chat_member(channel_id, user_id)
-        if member.status in ["member", "administrator", "creator"]:
-            await callback.answer("Вы подписаны на канал!")
+        member = await callback.bot.get_chat_member(chat_id=GROUP_ID, user_id=user_id)
+        if member.status != 'left':
+            await callback.answer("Вы подписаны на канал ✅")
         else:
-            await callback.answer("Вы не подписаны на канал.", show_alert=True)
+            await callback.answer("Вы не подписаны на канал ❌", show_alert=True)
     except Exception as e:
-        if "Bad Request: User not found" in str(e):
-            await callback.answer("Не удалось найти пользователя.", show_alert=True)
-        elif "Bad Request: chat not found" in str(e):
-            await callback.answer("Канал не найден.", show_alert=True)
-        else:
-            await callback.answer("Не удалось проверить подписку.")
-            print(e)
+        print(f"check_subscription error: {e}")
 
 
     # await callback.message.answer(bot_replicas['instructions']['android'][0])
