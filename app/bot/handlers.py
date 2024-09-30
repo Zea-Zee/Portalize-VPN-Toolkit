@@ -5,9 +5,9 @@ from aiogram import F, Router
 from aiogram.types import Message, CallbackQuery, FSInputFile
 from aiogram.filters import CommandStart, Command
 
-
 from config import GROUP_ID
 import bot.keyboards as kb
+import database.requests as rq
 
 
 router = Router()
@@ -29,6 +29,7 @@ async def send_options(message: Message, edit=False):
 
 @router.message(CommandStart())
 async def handle_start(message: Message):
+    await rq.set_user(message.from_user.id)
     name = message.from_user.first_name
     await message.reply(f"{name}{bot_replicas['greet']}")
     await send_options(message)

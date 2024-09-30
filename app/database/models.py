@@ -1,9 +1,14 @@
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, BigInteger, Text, Enum
-from sqlalchemy.orm import relationship
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import relationship, DeclarativeBase
+from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncAttrs
 from sqlalchemy.ext.declarative import declarative_base
 
-Base = declarative_base()
+
+engine = create_async_engine(url='sqlite+aiosqlite:///db.sqlite3')
+async_session = async_sessionmaker(engine)
+
+class Base(AsyncAttrs, DeclarativeBase):
+    pass
 
 class User(Base):
     __tablename__ = 'users'
@@ -65,7 +70,12 @@ class PromoCode(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     code = Column(String, unique=True, nullable=False)
-    user_id = Column(Integer, ForeignKey('users.tg_id'), nullable=True) #tgid of allowed for this promo
-    user_tag = Column(String, nullable=True)                            #tgtag of allowed for this promo
+    user_id = Column(Integer, ForeignKey('users.tg_id'), nullable=True)     #tgid of allowed for this promo
+    user_tag = Column(String, nullable=True)                                #tgtag of allowed for this promo
     expiration_date = Column(DateTime, nullable=True)
-    type = Column(String, nullable=False)                               # just comment like 'friend' 'birthday' etc
+    type = Column(String, nullable=False)                                   # just comment like 'friend' 'birthday' etc
+
+
+async def async_main():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
