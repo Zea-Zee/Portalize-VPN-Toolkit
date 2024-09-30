@@ -4,7 +4,9 @@ import asyncio
 
 from aiogram import F, Router
 from aiogram.types import Message, CallbackQuery, FSInputFile
-from aiogram.filters import CommandStart, Command
+from aiogram.filters import CommandStart
+from aiogram.fsm.state import StatesGroup, State
+from aiogram.fsm.context import FSMContext
 
 from config import GROUP_ID
 import bot.keyboards as kb
@@ -18,8 +20,24 @@ router = Router()
 with open('./media/bot_replicas.json', 'r', encoding='utf-8') as file:
     bot_replicas = json.load(file)
 
-user_messages = {}
-user_payments = {}
+user_actions = {}
+
+
+class Status(StatesGroup):
+    choose_option = State()
+    choose_plan = State()
+    payment = State()
+    confirm_payment = State()
+
+
+def push_action(user_id: int, action, callback: CallbackQuery):
+    user_actions[user_id].append((action, callback))
+
+
+def pop_action(user_id: int):
+    if user_actions[user_id]:
+        return user_actions[user_id].pop()
+    return None
 
 
 async def send_options(message: Message, edit=False):
@@ -28,28 +46,19 @@ async def send_options(message: Message, edit=False):
         msg = await message.edit_text(bot_replicas['chooseOption'], reply_markup=kb.options)
     else:
         msg = await message.answer(bot_replicas['chooseOption'], reply_markup=kb.options)
-    user_messages[user_id] = msg
+
 
 
 @router.message(CommandStart())
 async def handle_start(message: Message):
-    await rq.set_user(message.from_user.id)
     name = message.from_user.first_name
+    id = message.from_user.id
+    if user_actions[id]:
+        user_actions[id] = []
+    await rq.set_user(id)
+
     await message.reply(f"{name}{bot_replicas['greet']}")
     await send_options(message)
-
-
-@router.callback_query(F.data == 'back_button')
-async def back_to_start(callback: CallbackQuery):
-    print(callback)
-    print(user_messages)
-    user_id = callback.from_user.id
-    if user_id in user_messages:
-        await callback.message.edit_text(
-            text=bot_replicas['chooseOption'],
-            reply_markup=kb.options
-        )
-    callback.answer('Вы вернулись назад')
 
 
 @router.callback_query(F.data == 'trial_button')
@@ -104,6 +113,19 @@ async def check_subscription(callback: CallbackQuery):
             await callback.answer("Вы не подписаны на канал ❌", show_alert=True)
     except Exception as e:
         print(f"check_subscription error: {e}")
+
+
+@router.callback_query(F.data == 'back_button')
+async def back_button(callback: CallbackQuery):
+    user_id = callback.from_user.id
+    last_action, last_callback = pop_action(user_id)  # Извлекаем последнее действие
+
+    if last_action:
+        action, last_callback = last_action  # Извлекаем функцию и callback
+        await action(last_callback)  # Вызываем функцию-обработчик
+    else:
+        await callback.answer("Нет действий для возврата.")
+
 
     # await callback.message.answer(bot_replicas['instructions']['android'][0])
 
