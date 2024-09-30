@@ -17,7 +17,7 @@ class User(Base):
     tg_id = Column(BigInteger, unique=True, nullable=False)                 #user's telegram ID
     enter_date = Column(DateTime, nullable=False)                           #date when user made /start
     referral_balance = Column(Integer, default=0)                           #ruble balance of referal program
-    referral_id = Column(Integer, ForeignKey('users.id'), nullable=True)    #id of referal who invinted user
+    referral_id = Column(Integer, ForeignKey('users.id'), nullable=True, default=None)    #id of referal who invinted user
     referrals = relationship("User", backref="referrer", remote_side=[id])  #relation to all invited users
     subscription = relationship("Subscription", back_populates="user")      #link to user's subscription
     config = relationship("Config", back_populates="user", uselist=False)   #ref to confgis
@@ -30,7 +30,7 @@ class Subscription(Base):
     start_date = Column(DateTime, nullable=True)
     expiration_date = Column(DateTime, nullable=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)       #id of owner
-    user = relationship("User", back_populates="subscriptions")
+    user = relationship("User", back_populates="subscription")
     status = Column(Enum('active', 'expired', 'archived'), default='active')
 
 class Config(Base):
@@ -40,6 +40,7 @@ class Config(Base):
     type = Column(String, nullable=False)                                   #example: openvpn
     start_date = Column(DateTime, nullable=True)
     config_file = Column(Text, nullable=False)                              #config name in filesystem
+    vpn_server_id = Column(Integer, ForeignKey('vpn_servers.id'), nullable=False)
     vpn_server = relationship("VPNServer", back_populates="configs")
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)       #ref to owner
     user = relationship("User", back_populates="config")
@@ -73,7 +74,17 @@ class PromoCode(Base):
     user_id = Column(Integer, ForeignKey('users.tg_id'), nullable=True)     #tgid of allowed for this promo
     user_tag = Column(String, nullable=True)                                #tgtag of allowed for this promo
     expiration_date = Column(DateTime, nullable=True)
-    type = Column(String, nullable=False)                                   # just comment like 'friend' 'birthday' etc
+    type = Column(String, nullable=False)                                   #just comment like 'friend' 'birthday' etc
+
+class SubscriptionPlan(Base):
+    __tablename__ = 'subscription_plans'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    type = Column(Integer, nullable=False)
+    name = Column(String, nullable=False)
+    duration_months = Column(Integer, nullable=False)
+    price = Column(Integer, nullable=False)
+    discount = Column(Integer, nullable=True, default=None)
 
 
 async def async_main():

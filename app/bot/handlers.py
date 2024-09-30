@@ -1,5 +1,6 @@
 import time
 import json
+import asyncio
 
 from aiogram import F, Router
 from aiogram.types import Message, CallbackQuery, FSInputFile
@@ -8,6 +9,8 @@ from aiogram.filters import CommandStart, Command
 from config import GROUP_ID
 import bot.keyboards as kb
 import database.requests as rq
+from database.requests import get_plan
+from payment import create_payment, get_payment_result
 
 
 router = Router()
@@ -16,6 +19,7 @@ with open('./media/bot_replicas.json', 'r', encoding='utf-8') as file:
     bot_replicas = json.load(file)
 
 user_messages = {}
+user_payments = {}
 
 
 async def send_options(message: Message, edit=False):
@@ -54,22 +58,37 @@ async def get_trial(callback: CallbackQuery):
     callback.answer()
 
 
-@router.callback_query(F.data == 'buy_button')
+@router.callback_query(F.data.startswith('choose_plan|'))
 async def get_trial(callback: CallbackQuery):
+    type = int(callback.data.split('|')[1])
+    reply = await kb.build_plans(type)
+    await callback.message.edit_text(bot_replicas['chooseBuyPlan'], reply_markup=reply)
     callback.answer(bot_replicas['goToPayment'])
-    await callback.message.edit_text(bot_replicas['chooseBuyPlan'], reply_markup=kb.buy_plans)
 
 
-@router.callback_query(F.data == 'present_button')
-async def get_trial(callback: CallbackQuery):
-    callback.answer(bot_replicas['goToPayment'])
-    await callback.message.edit_text(bot_replicas['choosePresentPlan'], reply_markup=kb.gift_plans)
-
-
-@router.callback_query(F.data == 'payment')
+@router.callback_query(F.data.startswith('payment|'))
 async def make_payment(callback: CallbackQuery):
-    await callback.answer(bot_replicas['notRealized'], show_alert=True)
-    await send_options(callback.message, True)
+    plan_id = int(callback.data.split('|')[1])
+    user_id = callback.message.from_user.id
+    plan = await get_plan(plan_id)
+    print(plan)
+    price = plan.price
+    description = f"Покупка подписки на {plan.name}"
+    payment_url, payment_id = create_payment(price, user_id, description)
+    reply = await kb.build_payment_keyboard(payment_url, payment_id, price)
+    user_payments[user_id] = payment_id
+    await callback.message.edit_text(bot_replicas['goToPayment'], reply_markup=reply)
+    await callback.answer()
+
+
+@router.callback_query(F.data.startswith('check_payment|'))
+async def make_payment(callback: CallbackQuery):
+    payment_id = callback.data.split('|')[1]
+    payment_result = get_payment_result(payment_id)
+    if payment_result['status'] == 'succeeded':
+        await callback.answer("Оплата прошла успешно, выдаем вам подписку✅")
+    await callback.answer("Оплата еще не прошла, попробуйте чуть позже❌")
+    # print(json.dumps(check_result))
 
 
 @router.callback_query(F.data == 'check_subscription')
@@ -85,7 +104,6 @@ async def check_subscription(callback: CallbackQuery):
             await callback.answer("Вы не подписаны на канал ❌", show_alert=True)
     except Exception as e:
         print(f"check_subscription error: {e}")
-
 
     # await callback.message.answer(bot_replicas['instructions']['android'][0])
 

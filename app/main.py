@@ -18,13 +18,13 @@ colorama_init(autoreset=True)
 async def main():
     await async_main()
     print(f"{Fore.GREEN}Database is active✅")
-    await dp.start_polling(bot)
+    await dp.start_polling(bot, skip_updates=False)
     print(f"{Fore.GREEN}Bot is active✅")
 
 
 if __name__ == '__main__':
     dp.include_router(router)
-    logging.basicConfig(level=logging.INFO)
+    # logging.basicConfig(level=logging.INFO)
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
