@@ -20,58 +20,66 @@ router = Router()
 with open('./media/bot_replicas.json', 'r', encoding='utf-8') as file:
     bot_replicas = json.load(file)
 
-user_actions = {}
+user_payments = {}
 
 
-class Status(StatesGroup):
-    choose_option = State()
-    choose_plan = State()
+class PaymentProcess(StatesGroup):
+    recipient = State()
+    plan = State()
     payment = State()
-    confirm_payment = State()
-
-
-def push_action(user_id: int, action, callback: CallbackQuery):
-    user_actions[user_id].append((action, callback))
-
-
-def pop_action(user_id: int):
-    if user_actions[user_id]:
-        return user_actions[user_id].pop()
-    return None
-
-
-async def send_options(message: Message, edit=False):
-    user_id = message.from_user.id
-    if edit:
-        msg = await message.edit_text(bot_replicas['chooseOption'], reply_markup=kb.options)
-    else:
-        msg = await message.answer(bot_replicas['chooseOption'], reply_markup=kb.options)
-
+    payment_status = State()
 
 
 @router.message(CommandStart())
 async def handle_start(message: Message):
-    name = message.from_user.first_name
     id = message.from_user.id
-    if user_actions[id]:
-        user_actions[id] = []
     await rq.set_user(id)
+    name = message.from_user.first_name
+    await message.answer(f"{name}, {bot_replicas['greet']}")
+    await first_time_menu(message)
 
-    await message.reply(f"{name}{bot_replicas['greet']}")
-    await send_options(message)
+
+# TODO add check for trial period
+async def first_time_menu(message: Message):
+    name = message.from_user.first_name
+    if True:
+        keyboard = await kb.build_menu_keyboard(trial=True)
+        await message.answer(f"{name}, {bot_replicas['trial']}", parse_mode='HTML')
+    else:
+        keyboard = await kb.build_menu_keyboard()
+    await message.answer(f"{bot_replicas['menu']}", reply_markup=keyboard)
+
+
+@router.callback_query(F.data == 'menu_button')
+async def second_time_menu(callback: CallbackQuery):
+    if True:
+        keyboard = await kb.build_menu_keyboard(trial=True)
+    else:
+        keyboard = await kb.build_menu_keyboard()
+    await callback.message.edit_text(f"{bot_replicas['menu']}", reply_markup=keyboard)
 
 
 @router.callback_query(F.data == 'trial_button')
 async def get_trial(callback: CallbackQuery):
-    await callback.message.edit_text(bot_replicas['subscribeText'], reply_markup=kb.subscribe)
+    await callback.message.edit_text(bot_replicas['subscribeText'], reply_markup=kb.subscribe_to_channel)
     callback.answer()
 
 
-@router.callback_query(F.data.startswith('choose_plan|'))
+@router.callback_query(F.data.startswith('choose_recipient_button'))
+async def get_trial(callback: CallbackQuery):
+    await callback.message.edit_text(bot_replicas['chooseRecipient'], reply_markup=kb.choose_recipient)
+    await callback.answer()
+
+
+@router.callback_query(F.data.startswith('choose_plan_button|'))
 async def get_trial(callback: CallbackQuery):
     type = int(callback.data.split('|')[1])
     reply = await kb.build_plans(type)
-    await callback.message.edit_text(bot_replicas['chooseBuyPlan'], reply_markup=reply)
+    if type == 1:
+        replica = 'choosePresentPlan'
+    else:
+        replica = 'chooseBuyPlan'
+    await callback.message.edit_text(bot_replicas[replica], reply_markup=reply)
     callback.answer(bot_replicas['goToPayment'])
 
 
@@ -103,7 +111,7 @@ async def make_payment(callback: CallbackQuery):
 @router.callback_query(F.data == 'check_subscription')
 async def check_subscription(callback: CallbackQuery):
     user_id = callback.from_user.id
-    print(GROUP_ID)
+    # print(GROUP_ID)
 
     try:
         member = await callback.bot.get_chat_member(chat_id=GROUP_ID, user_id=user_id)
@@ -118,14 +126,14 @@ async def check_subscription(callback: CallbackQuery):
 @router.callback_query(F.data == 'back_button')
 async def back_button(callback: CallbackQuery):
     user_id = callback.from_user.id
-    last_action, last_callback = pop_action(user_id)  # Извлекаем последнее действие
+    last_action, last_callback = pop_action(
+        user_id)  # Извлекаем последнее действие
 
     if last_action:
         action, last_callback = last_action  # Извлекаем функцию и callback
         await action(last_callback)  # Вызываем функцию-обработчик
     else:
         await callback.answer("Нет действий для возврата.")
-
 
     # await callback.message.answer(bot_replicas['instructions']['android'][0])
 
