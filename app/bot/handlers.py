@@ -101,10 +101,11 @@ async def make_payment(callback: CallbackQuery):
 @router.callback_query(F.data.startswith('check_payment|'))
 async def make_payment(callback: CallbackQuery):
     payment_id = callback.data.split('|')[1]
+    if payment_id 
     payment_result = get_payment_result(payment_id)
     if payment_result['status'] == 'succeeded':
-        await callback.answer("Оплата прошла успешно, выдаем вам подписку✅")
-    await callback.answer("Оплата еще не прошла, попробуйте чуть позже❌")
+        await callback.answer("Оплата прошла успешно, выдаем вам подписку ✅")
+    await callback.answer("Оплата еще не прошла, попробуйте чуть позже ❌")
     # print(json.dumps(check_result))
 
 
