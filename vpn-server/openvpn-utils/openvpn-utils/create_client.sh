@@ -167,10 +167,10 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 		read -p "Protocol [1]: " protocol
 	done
 	case "$protocol" in
-		1|"")
+		1|"") 
 		protocol=udp
 		;;
-		2)
+		2) 
 		protocol=tcp
 		;;
 	esac
@@ -196,8 +196,10 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 		read -p "DNS server [1]: " dns
 	done
 	echo
-	echo "Enter a name for the first client:"
-	client=`cat client_name.txt`
+	name_client=$(tr -d '\r' < client_name.txt)
+	host_name=$(hostname)
+	cur_timestamp=$(TZ="Etc/UTC" date +"%Y-%m-%d-%H-%M-%S")
+	unsanitized_client="${name_client}_${host_name}_${cur_timestamp}"
 	# Allow a limited set of characters to avoid conflicts
 	client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
 	[[ -z "$client" ]] && client="client"
@@ -215,6 +217,7 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 			firewall="iptables"
 		fi
 	fi
+	read -n1 -r -p "Press any key to continue..."
 	# If running inside a container, disable LimitNPROC to prevent conflicts
 	if systemd-detect-virt -cq; then
 		mkdir /etc/systemd/system/openvpn-server@server.service.d/ 2>/dev/null
@@ -436,6 +439,7 @@ else
 	echo "   2) Revoke an existing client"
 	echo "   3) Remove OpenVPN"
 	echo "   4) Exit"
+	#read -p "Option: " option
 	option=1
 	until [[ "$option" =~ ^[1-4]$ ]]; do
 		echo "$option: invalid selection."
@@ -444,11 +448,14 @@ else
 	case "$option" in
 		1)
 			echo
-			echo "Provide a name for the client:"
-			unsanitized_client=`cat ~/Portalize-VPN-Toolkit/vpn-server/client_name.txt`
+			name_client=$(tr -d '\r' < client_name.txt)
+			host_name=$(hostname)
+			cur_timestamp=$(TZ="Etc/UTC" date +"%Y-%m-%d-%H-%M-%S")
+			unsanitized_client="${name_client}_${host_name}_${cur_timestamp}"
 			client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
 			while [[ -z "$client" || -e /etc/openvpn/server/easy-rsa/pki/issued/"$client".crt ]]; do
 				echo "$client: invalid name."
+				exit 1
 				client=$(sed 's/[^0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-]/_/g' <<< "$unsanitized_client")
 			done
 			cd /etc/openvpn/server/easy-rsa/
