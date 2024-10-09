@@ -162,7 +162,8 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 	echo "Which protocol should OpenVPN use?"
 	echo "   1) UDP (recommended)"
 	echo "   2) TCP"
-	read -p "Protocol [1]: " protocol
+	#read -p "Protocol [1]: " protocol
+	protocol=1
 	until [[ -z "$protocol" || "$protocol" =~ ^[12]$ ]]; do
 		echo "$protocol: invalid selection."
 		read -p "Protocol [1]: " protocol
@@ -191,7 +192,8 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 	echo "   4) OpenDNS"
 	echo "   5) Quad9"
 	echo "   6) AdGuard"
-	read -p "DNS server [1]: " dns
+	#read -p "DNS server [1]: " dns
+	dns=2
 	until [[ -z "$dns" || "$dns" =~ ^[1-6]$ ]]; do
 		echo "$dns: invalid selection."
 		read -p "DNS server [1]: " dns
@@ -218,7 +220,7 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 			firewall="iptables"
 		fi
 	fi
-	read -n1 -r -p "Press any key to continue..."
+	#read -n1 -r -p "Press any key to continue..."
 	# If running inside a container, disable LimitNPROC to prevent conflicts
 	if systemd-detect-virt -cq; then
 		mkdir /etc/systemd/system/openvpn-server@server.service.d/ 2>/dev/null
