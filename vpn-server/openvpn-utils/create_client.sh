@@ -117,7 +117,8 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 		echo
 		echo "Which IPv4 address should be used?"
 		ip -4 addr | grep inet | grep -vE '127(\.[0-9]{1,3}){3}' | cut -d '/' -f 1 | grep -oE '[0-9]{1,3}(\.[0-9]{1,3}){3}' | nl -s ') '
-		read -p "IPv4 address [1]: " ip_number
+		#read -p "IPv4 address [1]: " ip_number
+		ip_number=1
 		until [[ -z "$ip_number" || "$ip_number" =~ ^[0-9]+$ && "$ip_number" -le "$number_of_ip" ]]; do
 			echo "$ip_number: invalid selection."
 			read -p "IPv4 address [1]: " ip_number
@@ -167,10 +168,10 @@ if [[ ! -e /etc/openvpn/server/server.conf ]]; then
 		read -p "Protocol [1]: " protocol
 	done
 	case "$protocol" in
-		1|"") 
+		1|"")
 		protocol=udp
 		;;
-		2) 
+		2)
 		protocol=tcp
 		;;
 	esac
