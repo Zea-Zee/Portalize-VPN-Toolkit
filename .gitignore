@@ -4,3 +4,4 @@
 *.sqlite3*
 .env
 app/.env
+vpn-server/.env

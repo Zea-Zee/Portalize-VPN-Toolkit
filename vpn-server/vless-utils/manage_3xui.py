@@ -134,7 +134,8 @@ class X3API:
 # Пример использования класса
 if __name__ == "__main__":
     api = X3API(host="http://89.36.161.85:51721/vWF2dlUjXSS9iDg", user="", password="")
-    api.get_inbounds()
+    
+    # api.get_inbounds()
     # api.create_client(email="newclient@example.com")
 
     # # Получение IP-адресов клиента
