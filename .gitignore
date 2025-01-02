@@ -5,3 +5,5 @@
 .env
 app/.env
 vpn-server/.env
+outline/outline_config.json
+outline/keys.txt
