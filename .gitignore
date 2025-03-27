@@ -7,3 +7,7 @@ app/.env
 vpn-server/.env
 outline/outline_config.json
 outline/keys.txt
+
+
+#temp:
+vpn-server/vless-utils/manage_3xui.py

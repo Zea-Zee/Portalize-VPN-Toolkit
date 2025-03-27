@@ -20,6 +20,11 @@ async def build_menu_keyboard(trial: bool = False):
     keyboard.add(InlineKeyboardButton(text='🧍Реферальная программа🧍‍♀️', callback_data='referal_button'))
     return keyboard.adjust(1).as_markup()
 
+main_menu = InlineKeyboardMarkup(inline_keyboard=[
+        [InlineKeyboardButton(text="↩️ МЕНЮ ↩️", callback_data="menu_button")]
+    ]
+)
+
 subscribe_to_channel = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text="Подписаться", url='https://t.me/PortalizerVPN')],
     [InlineKeyboardButton(text='Я подписался ✅', callback_data='check_subscription')],
@@ -48,19 +53,21 @@ async def build_plans(type=0):
     keyboard = InlineKeyboardBuilder()
     if not plans:
         raise Exception("There are not any plans: build_plans")
-    for plan in plans:
+
+    sorted_plans = sorted(plans, key=lambda plan: plan.price)
+    for plan in sorted_plans:
         # print(plan.id)
         text = plan.name
         if plan.discount:
-            discount_sum = round(plan.price * (plan.discount / 100))
-            new_price = round(plan.price - discount_sum)
-            text += f" {new_price} рублей (-{round(plan.discount)}% / -{discount_sum}р.)"
+            # discount_sum = round(plan.price * (plan.discount / 100))
+            # new_price = round(plan.price - discount_sum)
+            text += f" - {plan.price} руб (-{round(plan.discount)}%)"
         else:
-            text += f" {round(plan.price)} рублей"
+            text += f" - {round(plan.price)} рублей"
         callback_data = f"payment|{plan.id}"
         print("callback_data", callback_data)
         keyboard.add(InlineKeyboardButton(text=text, callback_data=callback_data))
-    keyboard.add(InlineKeyboardButton(text="◀️ Назад", callback_data="choose_recipient_button"))
+    keyboard.add(InlineKeyboardButton(text="◀️ Назад ◀️", callback_data="choose_recipient_button"))
     return keyboard.adjust(1).as_markup()
 
 

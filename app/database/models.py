@@ -82,7 +82,7 @@ class SubscriptionPlan(Base):
     id = Column(Integer, primary_key=True, autoincrement=True)
     type = Column(Integer, nullable=False)
     name = Column(String, nullable=False)
-    duration_months = Column(Integer, nullable=False)
+    duration = Column(String, nullable=False)   # 7_d, 3_m, 1y etc
     price = Column(Integer, nullable=False)
     discount = Column(Integer, nullable=True, default=None)
 

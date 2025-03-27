@@ -35,7 +35,7 @@ async def handle_start(message: Message):
     id = message.from_user.id
     await rq.set_user(id)
     name = message.from_user.first_name
-    await message.answer(f"{name}, {bot_replicas['greet']}")
+    await message.answer(f"{name}{bot_replicas['greet']}")
     await first_time_menu(message)
 
 
@@ -90,22 +90,25 @@ async def make_payment(callback: CallbackQuery):
     plan = await get_plan(plan_id)
     print(plan)
     price = plan.price
-    description = f"Покупка подписки на {plan.name}"
-    payment_url, payment_id = create_payment(price, user_id, description)
-    reply = await kb.build_payment_keyboard(payment_url, payment_id, price)
-    user_payments[user_id] = payment_id
-    await callback.message.edit_text(bot_replicas['goToPayment'], reply_markup=reply)
+    reply = kb.main_menu
+    await callback.message.edit_text(bot_replicas['notRealized'], reply_markup=reply)
     await callback.answer()
+    # description = f"Покупка подписки на {plan.name}"
+    # payment_url, payment_id = create_payment(price, user_id, description)
+    # reply = await kb.build_payment_keyboard(payment_url, payment_id, price)
+    # user_payments[user_id] = payment_id
+    # await callback.message.edit_text(bot_replicas['goToPayment'], reply_markup=reply)
+    # await callback.answer()
 
 
-@router.callback_query(F.data.startswith('check_payment|'))
-async def make_payment(callback: CallbackQuery):
-    payment_id = callback.data.split('|')[1]
-    if payment_id 
-    payment_result = get_payment_result(payment_id)
-    if payment_result['status'] == 'succeeded':
-        await callback.answer("Оплата прошла успешно, выдаем вам подписку ✅")
-    await callback.answer("Оплата еще не прошла, попробуйте чуть позже ❌")
+# @router.callback_query(F.data.startswith('check_payment|'))
+# async def make_payment(callback: CallbackQuery):
+#     payment_id = callback.data.split('|')[1]
+#     if payment_id
+#     payment_result = get_payment_result(payment_id)
+#     if payment_result['status'] == 'succeeded':
+#         await callback.answer("Оплата прошла успешно, выдаем вам подписку ✅")
+#     await callback.answer("Оплата еще не прошла, попробуйте чуть позже ❌")
     # print(json.dumps(check_result))
 
 
@@ -113,13 +116,15 @@ async def make_payment(callback: CallbackQuery):
 async def check_subscription(callback: CallbackQuery):
     user_id = callback.from_user.id
     # print(GROUP_ID)
-
     try:
         member = await callback.bot.get_chat_member(chat_id=GROUP_ID, user_id=user_id)
         if member.status != 'left':
             await callback.answer("Вы подписаны на канал ✅")
+            reply = kb.main_menu
+            await callback.message.edit_text(bot_replicas['notRealized'], reply_markup=reply)
+            await callback.answer()
         else:
-            await callback.answer("Вы не подписаны на канал ❌", show_alert=True)
+            await callback.answer("Вы еще не подписаны на канал ❌", show_alert=True)
     except Exception as e:
         print(f"check_subscription error: {e}")
 
