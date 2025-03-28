@@ -32,8 +32,8 @@ subscribe_to_channel = InlineKeyboardMarkup(inline_keyboard=[
 ])
 
 choose_recipient = InlineKeyboardMarkup(inline_keyboard=[
-    [InlineKeyboardButton(text="Купить себе 🥰", callback_data='choose_plan_button|0')],
-    [InlineKeyboardButton(text='Купить в подарок 🎁', callback_data='choose_plan_button|1')],
+    [InlineKeyboardButton(text="Купить себе 🥰", callback_data='choose_plan_button|2')],
+    [InlineKeyboardButton(text='Купить в подарок 🎁', callback_data='choose_plan_button|3')],
     [InlineKeyboardButton(text='Назад ◀️', callback_data='menu_button')]
 ])
 

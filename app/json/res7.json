@@ -1,0 +1,372 @@
+{
+    "success": true,
+    "msg": "",
+    "obj": [
+        {
+            "id": 2,
+            "up": 10058264808,
+            "down": 30953429062,
+            "total": 0,
+            "remark": "BASE",
+            "enable": true,
+            "expiryTime": 0,
+            "clientStats": [
+                {
+                    "id": 10,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "Gleb PC",
+                    "up": 6512300724,
+                    "down": 4754420507,
+                    "expiryTime": 0,
+                    "total": 0,
+                    "reset": 0
+                },
+                {
+                    "id": 11,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "Sema",
+                    "up": 3273988216,
+                    "down": 20921971542,
+                    "expiryTime": 0,
+                    "total": 0,
+                    "reset": 0
+                },
+                {
+                    "id": 12,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "Semin kent",
+                    "up": 83576995,
+                    "down": 3362166172,
+                    "expiryTime": 0,
+                    "total": 0,
+                    "reset": 0
+                },
+                {
+                    "id": 13,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "Koshelev Laptop",
+                    "up": 61675934,
+                    "down": 1789663755,
+                    "expiryTime": 0,
+                    "total": 0,
+                    "reset": 0
+                },
+                {
+                    "id": 27,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "api_test_60556",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1774698241000,
+                    "total": 1073741824,
+                    "reset": 0
+                },
+                {
+                    "id": 28,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "739596935_@QzeaQ",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1743767368000,
+                    "total": 214748364800,
+                    "reset": 0
+                },
+                {
+                    "id": 29,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "br6cwlrq",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1746014403642,
+                    "total": 107374182400,
+                    "reset": 0
+                },
+                {
+                    "id": 30,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "TST",
+                    "up": 1134,
+                    "down": 16422,
+                    "expiryTime": 1745582549419,
+                    "total": 107374182400,
+                    "reset": 0
+                },
+                {
+                    "id": 31,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "api_test_98798",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1774699656000,
+                    "total": 1073741824,
+                    "reset": 0
+                },
+                {
+                    "id": 32,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "api_test_15383",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1774701326000,
+                    "total": 214748364800,
+                    "reset": 0
+                },
+                {
+                    "id": 33,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "api_test_71602",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1774701459000,
+                    "total": 214748364800,
+                    "reset": 0
+                },
+                {
+                    "id": 34,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "api_test_78302",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1774701545000,
+                    "total": 214748364800,
+                    "reset": 0
+                }
+            ],
+            "listen": "",
+            "port": 443,
+            "protocol": "vless",
+            "settings": {
+                "clients": [
+                    {
+                        "comment": "",
+                        "email": "Gleb PC",
+                        "enable": true,
+                        "expiryTime": 0,
+                        "flow": "xtls-rprx-vision",
+                        "id": "655f1107-6f6e-4584-966c-1e74eed76ad5",
+                        "limitIp": 0,
+                        "reset": 0,
+                        "subId": "n63pld251v7gwzcc",
+                        "tgId": "",
+                        "totalGB": 0
+                    },
+                    {
+                        "comment": "",
+                        "email": "Sema",
+                        "enable": true,
+                        "expiryTime": 0,
+                        "flow": "xtls-rprx-vision",
+                        "id": "d05474db-cb9c-46ad-8698-33630da9e344",
+                        "limitIp": 0,
+                        "reset": 0,
+                        "subId": "hbzbqpfr2b1ugoxm",
+                        "tgId": 1067791786,
+                        "totalGB": 0
+                    },
+                    {
+                        "comment": "",
+                        "email": "Semin kent",
+                        "enable": true,
+                        "expiryTime": 0,
+                        "flow": "xtls-rprx-vision",
+                        "id": "e0518206-0469-4459-8ccc-ee598fc4925a",
+                        "limitIp": 0,
+                        "reset": 0,
+                        "subId": "h3h1lh1snpui7hnk",
+                        "tgId": "",
+                        "totalGB": 0
+                    },
+                    {
+                        "comment": "",
+                        "email": "Koshelev Laptop",
+                        "enable": true,
+                        "expiryTime": 0,
+                        "flow": "xtls-rprx-vision",
+                        "id": "e6e5a365-5e05-4aca-86f9-5c612decb304",
+                        "limitIp": 0,
+                        "reset": 0,
+                        "subId": "e5tftsz0ipnmdck3",
+                        "tgId": "",
+                        "totalGB": 0
+                    },
+                    {
+                        "comment": "Generated via API",
+                        "email": "api_test_60556",
+                        "enable": true,
+                        "expiryTime": 1774698241000,
+                        "flow": "xtls-rprx-vision",
+                        "id": "6f200dd5-0e51-49ef-8b83-52fd47c0abbf",
+                        "limitIp": 1,
+                        "reset": 0,
+                        "subId": "test",
+                        "tgId": "api_test_60556",
+                        "totalGB": 1073741824
+                    },
+                    {
+                        "comment": "Generated via API",
+                        "email": "739596935_@QzeaQ",
+                        "enable": true,
+                        "expiryTime": 1743767368000,
+                        "flow": "xtls-rprx-vision",
+                        "id": "b90a93f4-1532-492b-b1dc-b501f003fa1c",
+                        "limitIp": 1,
+                        "reset": 0,
+                        "subId": "test",
+                        "tgId": "739596935_@QzeaQ",
+                        "totalGB": 214748364800
+                    },
+                    {
+                        "comment": "",
+                        "email": "br6cwlrq",
+                        "enable": true,
+                        "expiryTime": 1746014403642,
+                        "flow": "xtls-rprx-vision",
+                        "id": "23cbfb83-194b-4ed3-bc11-ef2679061cee",
+                        "limitIp": 0,
+                        "reset": 0,
+                        "security": "auto",
+                        "subId": "gsch0rlqeyo6r06i",
+                        "tgId": 739596935,
+                        "totalGB": 107374182400
+                    },
+                    {
+                        "comment": "",
+                        "email": "TST",
+                        "enable": true,
+                        "expiryTime": 1745582549419,
+                        "flow": "xtls-rprx-vision",
+                        "id": "9fc3c5b4-b961-4f8b-bf64-096a920261dc",
+                        "limitIp": 0,
+                        "reset": 0,
+                        "subId": "q2smyo7tj9qu687u",
+                        "tgId": null,
+                        "totalGB": 107374182400
+                    },
+                    {
+                        "comment": "Generated via API",
+                        "email": "api_test_98798",
+                        "enable": true,
+                        "expiryTime": 1774699656000,
+                        "flow": "xtls-rprx-vision",
+                        "id": "0e566e53-6844-42fe-9d7e-ff7b372173b5",
+                        "limitIp": 1,
+                        "reset": 0,
+                        "subId": "test",
+                        "tgId": "api_test_98798",
+                        "totalGB": 1073741824
+                    },
+                    {
+                        "comment": "Generated via API",
+                        "email": "api_test_15383",
+                        "enable": true,
+                        "expiryTime": 1774701326000,
+                        "flow": "xtls-rprx-vision",
+                        "id": "5a00478b-8722-4a3b-9f6a-2c86b083e144",
+                        "limitIp": 1,
+                        "reset": 0,
+                        "subId": "5a00478b-8722-4a3b-9f6a-2c86b083e144",
+                        "tgId": "api_test_15383",
+                        "totalGB": 214748364800
+                    },
+                    {
+                        "comment": "Generated via API",
+                        "email": "api_test_71602",
+                        "enable": true,
+                        "expiryTime": 1774701459000,
+                        "flow": "xtls-rprx-vision",
+                        "id": "6953e5d8-1842-4b3a-811d-1608d40829ab",
+                        "limitIp": 1,
+                        "reset": 0,
+                        "subId": "6953e5d8-1842-4b3a-811d-1608d40829ab",
+                        "tgId": "api_test_71602",
+                        "totalGB": 214748364800
+                    },
+                    {
+                        "comment": "Generated via API",
+                        "email": "api_test_78302",
+                        "enable": true,
+                        "expiryTime": 1774701545000,
+                        "flow": "xtls-rprx-vision",
+                        "id": "012e39a4-8c8b-4aac-ac42-c76bc2f6fb1b",
+                        "limitIp": 1,
+                        "reset": 0,
+                        "subId": "PortalizerVPN_Riga_012e39a4-8c8b-4aac-ac42-c76bc2f6fb1b",
+                        "tgId": "api_test_78302",
+                        "totalGB": 214748364800
+                    }
+                ],
+                "decryption": "none",
+                "fallbacks": []
+            },
+            "streamSettings": {
+                "network": "tcp",
+                "security": "reality",
+                "externalProxy": [],
+                "realitySettings": {
+                    "show": false,
+                    "xver": 0,
+                    "dest": "google.com:443",
+                    "serverNames": [
+                        "google.com",
+                        "www.google.com"
+                    ],
+                    "privateKey": "-AGYzTPinUKQcqP-LM8QaohW0dRjdNc1Qq1-bU_ruHc",
+                    "minClient": "",
+                    "maxClient": "",
+                    "maxTimediff": 0,
+                    "shortIds": [
+                        "903d4ca5",
+                        "c2",
+                        "21e3",
+                        "2ae70c2a578784",
+                        "18cf81",
+                        "bb4c6e1a6720",
+                        "690f29c828",
+                        "12b2462257c4a733"
+                    ],
+                    "settings": {
+                        "publicKey": "aLCXRdrKMtMA-5rQqnsoA4ACI3tEAqJWc5ryR_NSY1s",
+                        "fingerprint": "chrome",
+                        "serverName": "",
+                        "spiderX": "/"
+                    }
+                },
+                "tcpSettings": {
+                    "acceptProxyProtocol": false,
+                    "header": {
+                        "type": "none"
+                    }
+                }
+            },
+            "tag": "inbound-443",
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                    "http",
+                    "tls",
+                    "quic",
+                    "fakedns"
+                ],
+                "metadataOnly": false,
+                "routeOnly": false
+            },
+            "allocate": {
+                "strategy": "always",
+                "refresh": 5,
+                "concurrency": 3
+            }
+        }
+    ]
+}

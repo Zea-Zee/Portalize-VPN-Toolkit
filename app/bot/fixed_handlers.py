@@ -115,25 +115,6 @@ async def make_payment(callback: CallbackQuery):
         reply_markup=reply
     )
     await callback.answer()
-    # description = f"Покупка подписки на {plan.name}"
-    # payment_url, payment_id = create_payment(price, user_id, description)
-    # reply = await kb.build_payment_keyboard(payment_url, payment_id, price)
-    # user_payments[user_id] = payment_id
-    # await callback.message.edit_text(
-    #     bot_replicas['goToPayment'],
-    #     reply_markup=reply
-    # )
-    # await callback.answer()
-
-
-# @router.callback_query(F.data.startswith('check_payment|'))
-# async def check_payment(callback: CallbackQuery):
-#     payment_id = callback.data.split('|')[1]
-#     payment_result = get_payment_result(payment_id)
-#     if payment_result['status'] == 'succeeded':
-#         await callback.answer("Оплата прошла успешно, выдаем вам подписку ✅")
-#     await callback.answer("Оплата еще не прошла, попробуйте чуть позже ❌")
-#     # print(json.dumps(check_result))
 
 
 @router.callback_query(F.data == 'check_subscription')
@@ -144,7 +125,7 @@ async def check_subscription(callback: CallbackQuery):
         member = await callback.bot.get_chat_member(
             chat_id=GROUP_ID, user_id=user_id
         )
-
+        
         if member.status != 'left':
             await callback.answer("Вы подписаны на канал ✅")
             tg_id = callback.from_user.id
@@ -152,25 +133,31 @@ async def check_subscription(callback: CallbackQuery):
             client_email = f"{tg_id}_@{tg_username}"
 
             try:
-                async with X3API(host=XUI_HOST, user=XUI_USER, password=XUI_PASSWORD) as api:
-                    current_time = datetime.now(timezone.utc)
-                    expiry_time = int(add_date(current_time, days=30).timestamp())
-                    sub_result = await api.create_client(tg_id=tg_id, tg_username=tg_username, expiryTime=expiry_time)
-                    if sub_result is not None and sub_result['success']:
-                        await callback.message.edit_text(
-                            f"Ваша подписка активирована! ✅\nСкопируйте ссылку и вставьте в приложение:\n'{sub_result['config']}'")
-                        print(f"Клиент с email {client_email} успешно создан.")
-                    else:
+                # Создаем клиента через асинхронный API
+                async with X3API(XUI_HOST, XUI_USER, XUI_PASSWORD) as api:
+                    curr_time = datetime.now(timezone.utc)
+                    # Подписка на 1 год
+                    expiry = add_date(curr_time, years=1)
+                    expiry_ts = int(expiry.timestamp())
+                    
+                    sub_result = await api.create_client(
+                        email=client_email, 
+                        expiryTime=expiry_ts
+                    )
+                    
+                    if sub_result is None:
                         await callback.message.answer(
-                            "Произошла ошибка при создании подписки. "
-                            "Попробуйте позже."
+                            "Ваша подписка активирована! ✅"
                         )
+                    else:
+                        msg = "Произошла ошибка при создании подписки. "
+                        msg += "Попробуйте позже."
+                        await callback.message.answer(msg)
             except Exception as e:
                 print(f"Ошибка создания подписки: {e}")
-                await callback.message.answer(
-                    "Произошла ошибка при активации вашей подписки. "
-                    "Наши специалисты уже работают над решением проблемы."
-                )
+                msg = "Произошла ошибка при активации вашей подписки. "
+                msg += "Наши специалисты уже работают над решением проблемы."
+                await callback.message.answer(msg)
         else:
             await callback.answer(
                 "Вы еще не подписаны на канал ❌",
@@ -178,10 +165,9 @@ async def check_subscription(callback: CallbackQuery):
             )
     except Exception as e:
         print(f"check_subscription error: {e}")
-        await callback.message.answer(
-            "Произошла ошибка при проверке подписки. "
-            "Пожалуйста, попробуйте позже."
-        )
+        msg = "Произошла ошибка при проверке подписки. "
+        msg += "Пожалуйста, попробуйте позже."
+        await callback.message.answer(msg)
 
 
 def save_action(user_id, action, callback):
@@ -206,14 +192,4 @@ async def back_button(callback: CallbackQuery):
     if last_action:
         await last_action(last_callback)  # Вызываем функцию-обработчик
     else:
-        await callback.answer("Нет действий для возврата.")
-
-    # await callback.message.answer(bot_replicas['instructions']['android'][0])
-
-    # file_path = '../db/configs/test.ovpn'
-    # file = FSInputFile(file_path)
-
-    # await callback.message.answer_document(file, caption=bot_replicas['instructions']['android'][1])
-    # await callback.message.answer(bot_replicas['instructions']['android'][1])
-    # await callback.message.answer(bot_replicas['instructions']['android'][2])
-    # await callback.message.answer(bot_replicas['instructions']['android'][4], parse_mode='HTML')
+        await callback.answer("Нет действий для возврата.") 

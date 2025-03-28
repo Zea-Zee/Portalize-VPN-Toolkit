@@ -1,0 +1,124 @@
+{
+    "success": true,
+    "msg": "",
+    "obj": [
+        {
+            "id": 2,
+            "up": 10057921412,
+            "down": 30931351171,
+            "total": 0,
+            "remark": "BASE",
+            "enable": true,
+            "expiryTime": 0,
+            "clientStats": [
+                {
+                    "id": 10,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "Gleb PC",
+                    "up": 6512300724,
+                    "down": 4754420507,
+                    "expiryTime": 0,
+                    "total": 0,
+                    "reset": 0
+                },
+                {
+                    "id": 11,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "Sema",
+                    "up": 3273717190,
+                    "down": 20899955683,
+                    "expiryTime": 0,
+                    "total": 0,
+                    "reset": 0
+                },
+                {
+                    "id": 12,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "Semin kent",
+                    "up": 83576995,
+                    "down": 3362166172,
+                    "expiryTime": 0,
+                    "total": 0,
+                    "reset": 0
+                },
+                {
+                    "id": 13,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "Koshelev Laptop",
+                    "up": 61675934,
+                    "down": 1789663755,
+                    "expiryTime": 0,
+                    "total": 0,
+                    "reset": 0
+                },
+                {
+                    "id": 27,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "api_test_60556",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1774698241000,
+                    "total": 1073741824,
+                    "reset": 0
+                },
+                {
+                    "id": 28,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "739596935_@QzeaQ",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1743767368000,
+                    "total": 214748364800,
+                    "reset": 0
+                },
+                {
+                    "id": 29,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "br6cwlrq",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1746014403642,
+                    "total": 107374182400,
+                    "reset": 0
+                },
+                {
+                    "id": 30,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "TST",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1745582549419,
+                    "total": 107374182400,
+                    "reset": 0
+                },
+                {
+                    "id": 31,
+                    "inboundId": 2,
+                    "enable": true,
+                    "email": "api_test_98798",
+                    "up": 0,
+                    "down": 0,
+                    "expiryTime": 1774699656000,
+                    "total": 1073741824,
+                    "reset": 0
+                }
+            ],
+            "listen": "",
+            "port": 443,
+            "protocol": "vless",
+            "settings": "{\n  \"clients\": [\n    {\n      \"comment\": \"\",\n      \"email\": \"Gleb PC\",\n      \"enable\": true,\n      \"expiryTime\": 0,\n      \"flow\": \"xtls-rprx-vision\",\n      \"id\": \"655f1107-6f6e-4584-966c-1e74eed76ad5\",\n      \"limitIp\": 0,\n      \"reset\": 0,\n      \"subId\": \"n63pld251v7gwzcc\",\n      \"tgId\": \"\",\n      \"totalGB\": 0\n    },\n    {\n      \"comment\": \"\",\n      \"email\": \"Sema\",\n      \"enable\": true,\n      \"expiryTime\": 0,\n      \"flow\": \"xtls-rprx-vision\",\n      \"id\": \"d05474db-cb9c-46ad-8698-33630da9e344\",\n      \"limitIp\": 0,\n      \"reset\": 0,\n      \"subId\": \"hbzbqpfr2b1ugoxm\",\n      \"tgId\": 1067791786,\n      \"totalGB\": 0\n    },\n    {\n      \"comment\": \"\",\n      \"email\": \"Semin kent\",\n      \"enable\": true,\n      \"expiryTime\": 0,\n      \"flow\": \"xtls-rprx-vision\",\n      \"id\": \"e0518206-0469-4459-8ccc-ee598fc4925a\",\n      \"limitIp\": 0,\n      \"reset\": 0,\n      \"subId\": \"h3h1lh1snpui7hnk\",\n      \"tgId\": \"\",\n      \"totalGB\": 0\n    },\n    {\n      \"comment\": \"\",\n      \"email\": \"Koshelev Laptop\",\n      \"enable\": true,\n      \"expiryTime\": 0,\n      \"flow\": \"xtls-rprx-vision\",\n      \"id\": \"e6e5a365-5e05-4aca-86f9-5c612decb304\",\n      \"limitIp\": 0,\n      \"reset\": 0,\n      \"subId\": \"e5tftsz0ipnmdck3\",\n      \"tgId\": \"\",\n      \"totalGB\": 0\n    },\n    {\n      \"comment\": \"Generated via API\",\n      \"email\": \"api_test_60556\",\n      \"enable\": true,\n      \"expiryTime\": 1774698241000,\n      \"flow\": \"xtls-rprx-vision\",\n      \"id\": \"6f200dd5-0e51-49ef-8b83-52fd47c0abbf\",\n      \"limitIp\": 1,\n      \"reset\": 0,\n      \"subId\": \"test\",\n      \"tgId\": \"api_test_60556\",\n      \"totalGB\": 1073741824\n    },\n    {\n      \"comment\": \"Generated via API\",\n      \"email\": \"739596935_@QzeaQ\",\n      \"enable\": true,\n      \"expiryTime\": 1743767368000,\n      \"flow\": \"xtls-rprx-vision\",\n      \"id\": \"b90a93f4-1532-492b-b1dc-b501f003fa1c\",\n      \"limitIp\": 1,\n      \"reset\": 0,\n      \"subId\": \"test\",\n      \"tgId\": \"739596935_@QzeaQ\",\n      \"totalGB\": 214748364800\n    },\n    {\n      \"comment\": \"\",\n      \"email\": \"br6cwlrq\",\n      \"enable\": true,\n      \"expiryTime\": 1746014403642,\n      \"flow\": \"xtls-rprx-vision\",\n      \"id\": \"23cbfb83-194b-4ed3-bc11-ef2679061cee\",\n      \"limitIp\": 0,\n      \"reset\": 0,\n      \"security\": \"auto\",\n      \"subId\": \"gsch0rlqeyo6r06i\",\n      \"tgId\": 739596935,\n      \"totalGB\": 107374182400\n    },\n    {\n      \"comment\": \"\",\n      \"email\": \"TST\",\n      \"enable\": true,\n      \"expiryTime\": 1745582549419,\n      \"flow\": \"xtls-rprx-vision\",\n      \"id\": \"9fc3c5b4-b961-4f8b-bf64-096a920261dc\",\n      \"limitIp\": 0,\n      \"reset\": 0,\n      \"subId\": \"q2smyo7tj9qu687u\",\n      \"tgId\": null,\n      \"totalGB\": 107374182400\n    },\n    {\n      \"comment\": \"Generated via API\",\n      \"email\": \"api_test_98798\",\n      \"enable\": true,\n      \"expiryTime\": 1774699656000,\n      \"flow\": \"xtls-rprx-vision\",\n      \"id\": \"0e566e53-6844-42fe-9d7e-ff7b372173b5\",\n      \"limitIp\": 1,\n      \"reset\": 0,\n      \"subId\": \"test\",\n      \"tgId\": \"api_test_98798\",\n      \"totalGB\": 1073741824\n    }\n  ],\n  \"decryption\": \"none\",\n  \"fallbacks\": []\n}",
+            "streamSettings": "{\n  \"network\": \"tcp\",\n  \"security\": \"reality\",\n  \"externalProxy\": [],\n  \"realitySettings\": {\n    \"show\": false,\n    \"xver\": 0,\n    \"dest\": \"google.com:443\",\n    \"serverNames\": [\n      \"google.com\",\n      \"www.google.com\"\n    ],\n    \"privateKey\": \"-AGYzTPinUKQcqP-LM8QaohW0dRjdNc1Qq1-bU_ruHc\",\n    \"minClient\": \"\",\n    \"maxClient\": \"\",\n    \"maxTimediff\": 0,\n    \"shortIds\": [\n      \"903d4ca5\",\n      \"c2\",\n      \"21e3\",\n      \"2ae70c2a578784\",\n      \"18cf81\",\n      \"bb4c6e1a6720\",\n      \"690f29c828\",\n      \"12b2462257c4a733\"\n    ],\n    \"settings\": {\n      \"publicKey\": \"aLCXRdrKMtMA-5rQqnsoA4ACI3tEAqJWc5ryR_NSY1s\",\n      \"fingerprint\": \"chrome\",\n      \"serverName\": \"\",\n      \"spiderX\": \"/\"\n    }\n  },\n  \"tcpSettings\": {\n    \"acceptProxyProtocol\": false,\n    \"header\": {\n      \"type\": \"none\"\n    }\n  }\n}",
+            "tag": "inbound-443",
+            "sniffing": "{\n  \"enabled\": true,\n  \"destOverride\": [\n    \"http\",\n    \"tls\",\n    \"quic\",\n    \"fakedns\"\n  ],\n  \"metadataOnly\": false,\n  \"routeOnly\": false\n}",
+            "allocate": "{\n  \"strategy\": \"always\",\n  \"refresh\": 5,\n  \"concurrency\": 3\n}"
+        }
+    ]
+}

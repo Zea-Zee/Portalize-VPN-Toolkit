@@ -8,6 +8,9 @@ YOOKASSA_SHOP_ID = os.getenv('YOOKASSA_SHOP_ID')
 TELGRAM_API_TOKEN = os.getenv('TELGRAM_API_TOKEN')
 GROUP_ID = os.getenv('GROUP_ID')
 
+XUI_HOST = os.getenv('XUI_HOST')
+XUI_USER = os.getenv('XUI_USER')
+XUI_PASSWORD = os.getenv('XUI_PASSWORD')
 
 if not YOOKASSA_API_TOKEN:
     raise Exception("No YOOKASSA_API_TOKEN token found!")

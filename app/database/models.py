@@ -15,6 +15,7 @@ class User(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True)
     tg_id = Column(BigInteger, unique=True, nullable=False)                 #user's telegram ID
+    tg_username = Column(String, unique=False, nullable=True)
     enter_date = Column(DateTime, nullable=False)                           #date when user made /start
     referral_balance = Column(Integer, default=0)                           #ruble balance of referal program
     referral_id = Column(Integer, ForeignKey('users.id'), nullable=True, default=None)    #id of referal who invinted user
@@ -26,10 +27,10 @@ class Subscription(Base):
     __tablename__ = 'subscriptions'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    type = Column(Integer, nullable=False)                                  #0-none, 1-trial, 2-5: 1-12m, 6-9: present 1-12m
+    type = Column(Integer, nullable=False)                                  #0-none, 1-trial, 2: 1-12m, 3: present 1-12m
     start_date = Column(DateTime, nullable=True)
     expiration_date = Column(DateTime, nullable=True)
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)       #id of owner
+    tg_user_id = Column(Integer, ForeignKey('users.tg_id'), nullable=False)       #id of owner
     user = relationship("User", back_populates="subscription")
     status = Column(Enum('active', 'expired', 'archived'), default='active')
 
